@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    h1= title
+    p Welcome to #{title} 
+    ul 
+        li User: #{user}
+        li Project: #{project}
+    table
+        tr
+            if user=='all' 
+                th User
+            if project=='all' 
+                th Project            
+            th Type
+            th Comment
+            th Date
+            th Time
+        each row in rows
+            tr
+                if user=='all' 
+                    td= row.user   
+                if project=='all' 
+                    td= row.project                            
+                td= row.type
+                td= row.comment
+                td= moment(row.clientTime).format("L")
+                td= moment(row.clientTime).format("LTS")
