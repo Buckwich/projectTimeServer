@@ -7,6 +7,7 @@ pipeline {
       steps {
         sh 'npm --version'
         sh 'ls -la'
+        sh 'npm install'
       }
     }
   }
