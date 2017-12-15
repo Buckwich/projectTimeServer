@@ -7,7 +7,8 @@ pipeline {
       steps {
         sh 'npm --version'
         sh 'ls -la'
-        sh 'npm install'
+        sh 'hostname'
+        sh 'sudo npm install'
       }
     }
   }
