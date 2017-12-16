@@ -1,15 +1,24 @@
 pipeline {
   agent {
     docker {
-      image 'node'
       args '-p 127.0.0.1:3000:3000'
+      image 'keymetrics/pm2'
     }
     
   }
   stages {
-    stage('install tools') {
-      steps {
-        sh 'npm install pm2'
+    stage('validate tools') {
+      parallel {
+        stage('pm2') {
+          steps {
+            sh 'pm2-docker -V'
+          }
+        }
+        stage('npm') {
+          steps {
+            sh 'npm -v'
+          }
+        }
       }
     }
     stage('Build') {
@@ -21,25 +30,12 @@ pipeline {
       steps {
         sh 'npm test'
         milestone 1
-        input 'ertg'
       }
     }
-    stage('Stage') {
-      parallel {
-        stage('stop') {
-          steps {
-            input 'Continue with Deployment?'
-            ws(dir: '/home/jenkins/projectTimeServer') {
-              sh 'npm stop'
-            }
-            
-          }
-        }
-        stage('start') {
-          steps {
-            sh 'node bin/www'
-          }
-        }
+    stage('start') {
+      steps {
+        sh 'pm2-docker -V'
+        sh 'pm2-docker bin/app.js'
       }
     }
     stage('Verify') {
