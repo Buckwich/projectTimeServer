@@ -11,7 +11,9 @@ pipeline {
       parallel {
         stage('pm2') {
           steps {
+            sh 'ls -la'
             sh 'pm2-docker -V'
+            sh 'ls -la'
           }
         }
         stage('npm') {
