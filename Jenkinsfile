@@ -40,27 +40,22 @@ pipeline {
     }
     stage('Stage') {
       parallel {
-        stage('error') {
+        stage('stop') {
           steps {
-            input 'Continue?'
+            input 'Continue with Deployment?'
             ws(dir: '/home/jenkins/projectTimeServer') {
               sh 'npm stop'
             }
             
           }
         }
-        stage('drgf') {
+        stage('start') {
           steps {
             ws(dir: '/home/jenkins/projectTimeServer') {
               sh '''npm install
 npm run pm2'''
             }
             
-          }
-        }
-        stage('ppm') {
-          steps {
-            sh 'echo "12345678"|su pm2'
           }
         }
       }
