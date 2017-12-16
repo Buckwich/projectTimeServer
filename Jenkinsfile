@@ -49,7 +49,6 @@ pipeline {
     }
   }
   environment {
-    HOME = '.'
     NODE_ENV = 'production'
   }
 }
