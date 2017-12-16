@@ -1,12 +1,12 @@
 pipeline {
   agent {
-    docker {
-      image 'node'
+    node {
+      label 'master'
     }
     
   }
   stages {
-    stage('Checkout Code') {
+    stage('Checkout') {
       steps {
         ws(dir: '/home/jenkins/projectTimeServer') {
           checkout scm
@@ -14,14 +14,22 @@ pipeline {
         
       }
     }
-    stage('node') {
-      steps {
-        sh 'npm -v'
+    stage('Validate') {
+      parallel {
+        stage('node') {
+          steps {
+            sh 'npm -v'
+          }
+        }
+        stage('pm2') {
+          steps {
+            sh 'pm2 -V'
+          }
+        }
       }
     }
-    stage('Build app') {
+    stage('Build') {
       steps {
-        sh 'npm prune'
         sh 'npm install'
       }
     }
@@ -30,19 +38,20 @@ pipeline {
         sh 'npm test'
       }
     }
-    stage('Deploy') {
+    stage('Stage') {
       steps {
-        input 'Ready to deploy?'
-        sh 'echo deployed'
+        echo 'Staged to stage.buckwich.de'
+        sh 'npm start'
       }
     }
     stage('Verify') {
       steps {
-        input 'Everything good?'
+        input 'Ready to deploy?'
       }
     }
   }
   environment {
     HOME = '.'
+    NODE_ENV = 'production'
   }
 }
