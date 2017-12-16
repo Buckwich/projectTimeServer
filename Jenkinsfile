@@ -37,7 +37,8 @@ pipeline {
         stage('stop') {
           steps {
             input 'kill?'
-            sh 'killall -KILL node'
+            sh 'top'
+            sh 'pkill --signal SIGINT node'
           }
         }
       }
