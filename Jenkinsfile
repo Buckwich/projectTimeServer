@@ -53,6 +53,11 @@ pipeline {
             sh 'sudo pm2 stop'
           }
         }
+        stage('hh') {
+          steps {
+            sh 'npm run pm2'
+          }
+        }
       }
     }
     stage('Verify') {
