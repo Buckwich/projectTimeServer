@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "cross-env DEBUG=projecttimeserver:* node-dev ./bin/www",
-    "pm2": "cross-env DEBUG=* pm2 start bin/www"
+    "pm2": "cross-env DEBUG=* pm2 start bin/www",
+    "stop": "cross-env DEBUG=* pm2 stop bin/www"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
