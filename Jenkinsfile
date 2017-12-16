@@ -5,7 +5,6 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh 'mkdir test'
         sh 'npm install'
         sh 'npm test'
       }
