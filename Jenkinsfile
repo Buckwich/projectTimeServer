@@ -8,9 +8,17 @@ pipeline {
   }
   stages {
     stage('validate tools') {
-      steps {
-        sh 'npm -v'
-        sh 'pm2-docker -V'
+      parallel {
+        stage('pm2') {
+          steps {
+            sh 'pm2-docker -V'
+          }
+        }
+        stage('npm') {
+          steps {
+            sh 'npm -v'
+          }
+        }
       }
     }
     stage('Build') {
@@ -34,6 +42,7 @@ pipeline {
         }
         stage('start') {
           steps {
+            sh 'pm2-docker -V'
             sh 'pm2-docker start bin/www -i 2'
           }
         }
