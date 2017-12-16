@@ -38,8 +38,8 @@ pipeline {
         HOME = ''
       }
       steps {
-        sh 'pm2-docker -V'
-        sh 'pm2-docker bin/app.js'
+        sh 'ls -la'
+        sh 'pm2-docker ./bin/app.js'
       }
     }
     stage('Verify') {
