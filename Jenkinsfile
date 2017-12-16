@@ -31,7 +31,10 @@ pipeline {
           }
           steps {
             sh 'ls -la'
-            sh 'node bin/app.js'
+            catchError() {
+              sh 'node bin/app.js'
+            }
+            
           }
         }
         stage('stop') {
