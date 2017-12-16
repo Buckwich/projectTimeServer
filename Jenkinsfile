@@ -43,7 +43,10 @@ pipeline {
         stage('error') {
           steps {
             input 'Continue?'
-            sh 'sudo pm2 stop'
+            ws(dir: '/home/jenkins/projectTimeServer') {
+              sh 'npm stop'
+            }
+            
           }
         }
         stage('drgf') {
