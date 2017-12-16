@@ -1,60 +1,50 @@
-#!/usr/bin/env groovy
-pipeline { 
-  agent { 
-    node { 
+pipeline {
+  agent {
+    node {
       label 'docker'
     }
+    
   }
-
   stages {
-    stage ('Checkout Code') {
+    stage('Checkout Code') {
       steps {
         checkout scm
       }
     }
-    stage ('Verify Tools'){
-      steps {
-        parallel (
-          node: { sh "npm -v" },
-          docker: { sh "docker -v" }
-        )
+    stage('Verify Tools') {
+      parallel {
+        stage('node') {
+          steps {
+            sh 'npm -v'
+          }
+        }
+        stage('docker') {
+          steps {
+            sh 'docker -v'
+          }
+        }
       }
     }
-    stage ('Build app') {
+    stage('Build app') {
       steps {
-        sh "npm prune"
-        sh "npm install"
+        sh 'npm prune'
+        sh 'npm install'
       }
     }
-    stage ('Test'){
+    stage('Test') {
       steps {
-        sh "npm test"
+        sh 'npm test'
       }
     }
- 
-    stage ('Build container') {
+    stage('Deploy') {
       steps {
-        sh "docker build -t badamsbb/node-example:latest ."
-        sh "docker tag badamsbb/node-example:latest badamsbb/node-example:v${env.BUILD_ID}"
+        input 'Ready to deploy?'
+        sh 'echo deployed'
       }
     }
-    stage ('Deploy') {
+    stage('Verify') {
       steps {
-        input "Ready to deploy?"
-        sh "docker stack rm node-example"
-        sh "docker stack deploy node-example --compose-file docker-compose.yml"
-        sh "docker service update node-example_server --image badamsbb/node-example:v${env.BUILD_ID}"
-      }
-    }
-    stage ('Verify') {
-      steps {
-        input "Everything good?"
-      }
-    }
-    stage ('Clean') {
-      steps {
-        sh "npm prune"
-        sh "rm -rf node_modules"
+        input 'Everything good?'
       }
     }
   }
