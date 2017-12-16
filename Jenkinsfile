@@ -46,7 +46,6 @@ ls -la node_modules/pm2/bin'''
     stage('start') {
       environment {
         DEBUG = '*'
-        HOME = ''
       }
       steps {
         sh 'ls -la'
