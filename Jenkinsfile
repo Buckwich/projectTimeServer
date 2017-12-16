@@ -1,31 +1,15 @@
 pipeline {
   agent {
-    node {
-      label 'master'
+    docker {
+      image 'node'
+      args '-p 127.0.0.1:3000:3000'
     }
     
   }
   stages {
-    stage('Checkout') {
+    stage('install tools') {
       steps {
-        ws(dir: '/home/jenkins/projectTimeServer') {
-          checkout scm
-        }
-        
-      }
-    }
-    stage('Validate') {
-      parallel {
-        stage('node') {
-          steps {
-            sh 'npm -v'
-          }
-        }
-        stage('pm2') {
-          steps {
-            sh 'echo pm2'
-          }
-        }
+        sh 'npm install pm2'
       }
     }
     stage('Build') {
@@ -36,23 +20,24 @@ pipeline {
     stage('Test') {
       steps {
         sh 'npm test'
+        milestone 1
+        input 'ertg'
       }
     }
     stage('Stage') {
       parallel {
-        stage('error') {
+        stage('stop') {
           steps {
-            input 'Continue?'
-            sh 'sudo pm2 stop'
-          }
-        }
-        stage('drgf') {
-          steps {
+            input 'Continue with Deployment?'
             ws(dir: '/home/jenkins/projectTimeServer') {
-              sh '''npm install
-npm run pm2'''
+              sh 'npm stop'
             }
             
+          }
+        }
+        stage('start') {
+          steps {
+            sh 'node bin/www'
           }
         }
       }
