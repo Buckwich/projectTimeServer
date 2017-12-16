@@ -1,7 +1,7 @@
 pipeline {
   agent {
-    node {
-      label 'master'
+    docker {
+      image 'node'
     }
     
   }
@@ -11,18 +11,9 @@ pipeline {
         checkout scm
       }
     }
-    stage('Verify Tools') {
-      parallel {
-        stage('node') {
-          steps {
-            sh 'npm -v'
-          }
-        }
-        stage('docker') {
-          steps {
-            sh 'docker -v'
-          }
-        }
+    stage('node') {
+      steps {
+        sh 'npm -v'
       }
     }
     stage('Build app') {
@@ -47,5 +38,8 @@ pipeline {
         input 'Everything good?'
       }
     }
+  }
+  environment {
+    HOME = '.'
   }
 }
