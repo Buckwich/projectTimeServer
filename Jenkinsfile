@@ -10,7 +10,7 @@ pipeline {
     stage('validate tools') {
       steps {
         sh 'npm -v'
-        sh 'pm2 -V'
+        sh 'pm2-docker -V'
       }
     }
     stage('Build') {
