@@ -43,13 +43,13 @@ pipeline {
         stage('Stage') {
           steps {
             echo 'Staged to stage.buckwich.de'
-            sh 'DEBUG=* pm2 start --no-daemon bin/www'
+            sh 'sudo DEBUG=* pm2 start bin/www'
           }
         }
         stage('error') {
           steps {
             input 'Continue?'
-            sh 'pm2 stop --no-daemon'
+            sh 'sudo pm2 stop'
           }
         }
       }
