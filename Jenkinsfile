@@ -23,7 +23,7 @@ pipeline {
         }
         stage('pm2') {
           steps {
-            sh 'pm2 --no-daemon -V'
+            sh 'echo pm2'
           }
         }
       }
@@ -47,6 +47,7 @@ pipeline {
     stage('Verify') {
       steps {
         input 'Ready to deploy?'
+        sh 'pm2 start bin/www -i 2'
       }
     }
   }
