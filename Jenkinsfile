@@ -7,9 +7,10 @@ pipeline {
   }
   stages {
     stage('Checkout Code') {
-      steps {
-        checkout scm
-        ws(dir: '/home/simon/projectTimeServer')
+      steps {        
+        ws(dir: '/home/simon/jenkins/projectTimeServer'){
+          checkout scm
+        }
       }
     }
     stage('node') {
