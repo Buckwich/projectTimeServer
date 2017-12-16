@@ -43,7 +43,7 @@ pipeline {
         stage('Stage') {
           steps {
             echo 'Staged to stage.buckwich.de'
-            sh 'DEBUG=* pm2 start bin/www'
+            sh 'DEBUG=* pm2 start --no-daemon bin/www'
           }
         }
         stage('error') {
