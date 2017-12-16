@@ -38,7 +38,7 @@ pipeline {
         stage('start') {
           steps {
             sh 'ls node_modules/pm2'
-            sh 'node_modules/pm2/bin/test'
+            sh 'ls -la'
           }
         }
       }
