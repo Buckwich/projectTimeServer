@@ -35,6 +35,10 @@ pipeline {
               sh 'node bin/app.js'
             }
             
+            timeout(time: 3, unit: 'HOURS') {
+              sh 'fgerds'
+            }
+            
           }
         }
         stage('stop') {
