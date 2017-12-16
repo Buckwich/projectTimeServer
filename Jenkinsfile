@@ -46,9 +46,10 @@ pipeline {
             sh 'npm start'
           }
         }
-        stage('') {
+        stage('error') {
           steps {
             input 'Continue?'
+            sh 'npm stop'
           }
         }
       }
