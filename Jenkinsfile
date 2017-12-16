@@ -33,6 +33,9 @@ pipeline {
       }
     }
     stage('start') {
+      environment {
+        DEBUG = '*'
+      }
       steps {
         sh 'pm2-docker -V'
         sh 'pm2-docker bin/app.js'
