@@ -39,9 +39,18 @@ pipeline {
       }
     }
     stage('Stage') {
-      steps {
-        echo 'Staged to stage.buckwich.de'
-        sh 'npm start'
+      parallel {
+        stage('Stage') {
+          steps {
+            echo 'Staged to stage.buckwich.de'
+            sh 'npm start'
+          }
+        }
+        stage('') {
+          steps {
+            input 'Continue?'
+          }
+        }
       }
     }
     stage('Verify') {
