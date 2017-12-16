@@ -21,7 +21,7 @@ pipeline {
             sh 'npm install pm2'
             sh '''ls -la
 ls -la node_modules/pm2/bin'''
-            sh './node_modules/pm2/bin/pm2-docker -V'
+            sh 'echo "./node_modules/pm2/bin/pm2-docker -V"'
             sh 'ls -la'
           }
         }
