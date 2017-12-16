@@ -37,7 +37,8 @@ pipeline {
         }
         stage('start') {
           steps {
-            sh 'node bin/www'
+            sh 'ls node_modules/pm2'
+            sh 'node_modules/pm2/bin/test'
           }
         }
       }
