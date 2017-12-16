@@ -13,8 +13,9 @@ pipeline {
           steps {
             sh 'ls -la'
             sh 'npm install pm2'
-            sh 'ls -la'
-            sh '$HOME/node_modules/pm2/pm2-docker -V'
+            sh '''ls -la
+ls -la node_modules/pm2/bin'''
+            sh './node_modules/pm2/bin/pm2-docker -V'
             sh 'ls -la'
           }
         }
