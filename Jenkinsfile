@@ -53,6 +53,12 @@ ls -la node_modules/pm2/bin'''
         sh 'pm2 start bin/www -i 2'
       }
     }
+    stage('') {
+      steps {
+        input 'wait'
+        sh 'ls -la'
+      }
+    }
   }
   environment {
     NODE_ENV = 'production'
