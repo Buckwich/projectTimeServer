@@ -1,4 +1,5 @@
-pipeline {   
+pipeline {  
+  agents any
   stages {
     stage ('Checkout Code') {
       steps {
