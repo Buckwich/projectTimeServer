@@ -2,7 +2,7 @@ pipeline {
   agent {
     docker {
       args '-p 127.0.0.1:3000:3000'
-      image 'keymetrics/pm2'
+      image 'node'
     }
     
   }
@@ -11,6 +11,8 @@ pipeline {
       parallel {
         stage('pm2') {
           steps {
+            sh 'ls -la'
+            sh 'npm install pm2 -g'
             sh 'ls -la'
             sh 'pm2-docker -V'
             sh 'ls -la'
