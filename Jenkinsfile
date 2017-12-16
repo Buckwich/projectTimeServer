@@ -22,7 +22,6 @@ pipeline {
       steps {
         sh 'npm test'
         milestone 1
-        input 'ertg'
       }
     }
     stage('Stage') {
@@ -30,16 +29,12 @@ pipeline {
         stage('stop') {
           steps {
             input 'Continue with Deployment?'
-            ws(dir: '/home/jenkins/projectTimeServer') {
-              sh 'npm stop'
-            }
-            
+            sh 'pm2 stop'
           }
         }
         stage('start') {
           steps {
-            sh 'ls node_modules/pm2/bin'
-            sh './node_modules/pm2/bin/pm2.js'
+            sh 'pm2-docker start bin/www -i 2'
           }
         }
       }
