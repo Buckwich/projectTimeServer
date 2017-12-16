@@ -1,15 +1,16 @@
 pipeline {
   agent {
     docker {
-      image 'node'
       args '-p 127.0.0.1:3000:3000'
+      image 'keymetrics/pm2'
     }
     
   }
   stages {
-    stage('install tools') {
+    stage('validate tools') {
       steps {
-        sh 'npm install pm2'
+        sh 'npm -v'
+        sh 'pm2 -V'
       }
     }
     stage('Build') {
