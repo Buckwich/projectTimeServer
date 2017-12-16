@@ -23,7 +23,7 @@ pipeline {
         }
         stage('pm2') {
           steps {
-            sh 'pm2 -V'
+            sh 'pm2 --no-daemon -V'
           }
         }
       }
