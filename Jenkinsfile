@@ -1,14 +1,7 @@
 #!/usr/bin/env groovy
 pipeline { 
-  agent { 
-    node { 
-      label 'docker'
-    }
-  }
-  tools {
-    nodejs 'nodejs'
-  }
- 
+  agent {    
+  } 
   stages {
     stage ('Checkout Code') {
       steps {
