@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('install tools') {
       steps {
-        sh 'npm install pm2 -g'
+        sh 'npm install pm2'
       }
     }
     stage('Build') {
@@ -37,11 +37,7 @@ pipeline {
         }
         stage('start') {
           steps {
-            ws(dir: '/home/jenkins/projectTimeServer') {
-              sh '''npm install
-npm run pm2'''
-            }
-            
+            sh 'node bin/www'
           }
         }
       }
