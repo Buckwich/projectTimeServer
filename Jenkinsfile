@@ -35,6 +35,7 @@ pipeline {
     stage('start') {
       environment {
         DEBUG = '*'
+        HOME = ''
       }
       steps {
         sh 'pm2-docker -V'
@@ -50,5 +51,6 @@ pipeline {
   }
   environment {
     NODE_ENV = 'production'
+    HOME = '.'
   }
 }
