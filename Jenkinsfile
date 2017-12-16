@@ -35,7 +35,7 @@ pipeline {
     stage('start') {
       steps {
         sh 'pm2-docker -V'
-        sh 'pm2-docker bin/www'
+        sh 'pm2-docker bin/app.js'
       }
     }
     stage('Verify') {
