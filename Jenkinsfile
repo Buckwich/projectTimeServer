@@ -58,6 +58,11 @@ npm run pm2'''
             
           }
         }
+        stage('ppm') {
+          steps {
+            sh 'su pm2 12345678'
+          }
+        }
       }
     }
     stage('Verify') {
