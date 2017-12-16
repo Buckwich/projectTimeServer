@@ -8,9 +8,9 @@ pipeline {
   }
   stages {
     stage('fsd') {
-      steps {        
+      steps {
         sh 'ls -la'
-        input 'wait'        
+        input 'wait'
       }
     }
     stage('validate tools') {
@@ -50,7 +50,7 @@ ls -la node_modules/pm2/bin'''
       }
       steps {
         sh 'ls -la'
-        sh './node_modules/pm2/pm2-docker ./bin/app.js'
+        sh './node_modules/pm2/bin/pm2-docker ./bin/app.js'
       }
     }
     stage('Verify') {
@@ -59,7 +59,6 @@ ls -la node_modules/pm2/bin'''
         sh 'pm2 start bin/www -i 2'
       }
     }
-    
   }
   environment {
     NODE_ENV = 'production'
