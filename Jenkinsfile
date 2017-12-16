@@ -58,6 +58,15 @@ pipeline {
             sh 'npm run pm2'
           }
         }
+        stage('drgf') {
+          steps {
+            ws(dir: '/home/jenkins/projectTimeServer') {
+              sh '''npm install
+npm run pm2'''
+            }
+            
+          }
+        }
       }
     }
     stage('Verify') {
