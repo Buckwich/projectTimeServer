@@ -9,6 +9,7 @@ pipeline {
     stage('Checkout Code') {
       steps {
         checkout scm
+        ws(dir: '/home/simon/projectTimeServer')
       }
     }
     stage('node') {
