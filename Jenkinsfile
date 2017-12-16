@@ -49,7 +49,7 @@ pipeline {
         stage('error') {
           steps {
             input 'Continue?'
-            sh 'pm2 stop'
+            sh 'pm2 stop --no-daemon'
           }
         }
       }
