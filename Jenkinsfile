@@ -7,29 +7,9 @@ pipeline {
     
   }
   stages {
-    stage('fsd') {
+    stage('Validate') {
       steps {
-        sh 'ls -la'
-        input 'wait'
-      }
-    }
-    stage('validate tools') {
-      parallel {
-        stage('pm2') {
-          steps {
-            sh 'ls -la'
-            sh 'npm install pm2'
-            sh '''ls -la
-ls -la node_modules/pm2/bin'''
-            sh 'echo "./node_modules/pm2/bin/pm2-docker -V"'
-            sh 'ls -la'
-          }
-        }
-        stage('npm') {
-          steps {
-            sh 'npm -v'
-          }
-        }
+        sh 'npm -v'
       }
     }
     stage('Build') {
@@ -43,13 +23,23 @@ ls -la node_modules/pm2/bin'''
         milestone 1
       }
     }
-    stage('start') {
-      environment {
-        DEBUG = '*'
-      }
-      steps {
-        sh 'ls -la'
-        sh './node_modules/pm2/bin/pm2-docker ./bin/app.js'
+    stage('Stage') {
+      parallel {
+        stage('start') {
+          environment {
+            DEBUG = '*'
+          }
+          steps {
+            sh 'ls -la'
+            sh 'node bin/app.js'
+          }
+        }
+        stage('stop') {
+          steps {
+            input 'kill?'
+            sh 'killall -KILL node'
+          }
+        }
       }
     }
     stage('Verify') {
