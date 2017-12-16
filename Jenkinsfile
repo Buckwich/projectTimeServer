@@ -60,7 +60,7 @@ npm run pm2'''
         }
         stage('ppm') {
           steps {
-            sh 'cat \'12345678\'|su pm2'
+            sh '12345678|su pm2'
           }
         }
       }
