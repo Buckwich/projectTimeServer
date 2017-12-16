@@ -43,6 +43,7 @@ pipeline {
         stage('Stage') {
           steps {
             echo 'Staged to stage.buckwich.de'
+            sh 'chmod 744 ./test.sh'
             sh './test.sh'
           }
         }
