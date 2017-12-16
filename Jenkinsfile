@@ -39,16 +39,27 @@ pipeline {
         }
         stage('stop') {
           steps {
-            input 'kill?'
-            sh 'pkill --signal SIGINT node'
+            catchError() {
+              input 'Stop staging?'
+              sh 'pkill --signal SIGINT node'
+            }
+            
           }
         }
       }
     }
-    stage('Verify') {
+    stage('Clean') {
       steps {
-        input 'Ready to deploy?'
-        sh 'pm2 start bin/www -i 2'
+        cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenSuccess: true, cleanWhenUnstable: true, cleanupMatrixParent: true, deleteDirs: true)
+      }
+    }
+    stage('Deploy') {
+      steps {
+        catchError() {
+          input 'Ready to deploy?'
+          echo 'deploying'
+        }
+        
       }
     }
   }
