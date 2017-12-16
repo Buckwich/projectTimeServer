@@ -12,7 +12,7 @@ pipeline {
         stage('pm2') {
           steps {
             sh 'ls -la'
-            sh 'npm install pm2 -g'
+            sh 'npm install pm2'
             sh 'ls -la'
             sh 'pm2-docker -V'
             sh 'ls -la'
@@ -43,7 +43,7 @@ pipeline {
       }
       steps {
         sh 'ls -la'
-        sh 'pm2-docker ./bin/app.js'
+        sh './node_modules/pm2/pm2-docker ./bin/app.js'
       }
     }
     stage('Verify') {
