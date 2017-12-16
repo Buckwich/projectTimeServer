@@ -60,7 +60,7 @@ npm run pm2'''
         }
         stage('ppm') {
           steps {
-            sh 'su pm2 12345678'
+            sh 'cat 12345678|su jenkins'
           }
         }
       }
