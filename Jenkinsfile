@@ -43,7 +43,7 @@ pipeline {
         stage('start') {
           steps {
             sh 'pm2-docker -V'
-            sh 'pm2-docker start bin/www -i 2'
+            sh 'pm2-docker start bin/www'
           }
         }
       }
