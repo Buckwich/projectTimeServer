@@ -37,8 +37,8 @@ pipeline {
         }
         stage('start') {
           steps {
-            sh 'ls node_modules/pm2'
-            sh 'ls -la'
+            sh 'ls node_modules/pm2/bin'
+            sh './node_modules/pm2/bin/pm2.js'
           }
         }
       }
