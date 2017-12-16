@@ -40,22 +40,10 @@ pipeline {
     }
     stage('Stage') {
       parallel {
-        stage('Stage') {
-          steps {
-            echo 'Staged to stage.buckwich.de'
-            sh 'chmod 744 ./test.sh'
-            sh './test.sh'
-          }
-        }
         stage('error') {
           steps {
             input 'Continue?'
             sh 'sudo pm2 stop'
-          }
-        }
-        stage('hh') {
-          steps {
-            sh 'npm run pm2'
           }
         }
         stage('drgf') {
