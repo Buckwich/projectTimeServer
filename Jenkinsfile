@@ -50,7 +50,7 @@ pipeline {
     stage('Deploy') {
       steps {
         sshagent(credentials: ['sshBuckwich']) {
-          sh 'ssh -o StrictHostKeyChecking=no -l simon buckwich.de uname -a'
+          sh 'ssh -o StrictHostKeyChecking=no -l simon simon@buckwich.de uname -a'
         }
         
       }
