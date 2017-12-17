@@ -1,8 +1,8 @@
 pipeline {
   agent {
     docker {
-      args '-p 127.0.0.1:3000:3000'
       image 'node'
+      args '-p 127.0.0.1:3000:3000 -v /etc/passwd:/etc/passwd\''
     }
     
   }
