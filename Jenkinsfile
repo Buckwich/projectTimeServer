@@ -26,9 +26,12 @@ pipeline {
     stage('Stage') {
       parallel {
         stage('start') {
+          environment {
+            DEBUG = '*'
+          }
           steps {
             sh 'ls -la'
-            timeout(unit: 'MINUTES', time: 1) {
+            timeout(unit: 'MINUTES', time: 5) {
               sh 'node bin/www'
             }
             
