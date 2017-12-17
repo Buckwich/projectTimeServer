@@ -28,11 +28,8 @@ pipeline {
         stage('start') {
           steps {
             sh 'ls -la'
-            catchError() {
-              timeout(time: 1, unit: 'MINUTES') {
-                sh 'node bin/www'
-              }
-              
+            timeout(unit: 'MINUTES', time: 1) {
+              sh 'node bin/www'
             }
             
           }
@@ -51,16 +48,6 @@ pipeline {
     stage('Clean') {
       steps {
         cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenSuccess: true, cleanWhenUnstable: true, cleanupMatrixParent: true, deleteDirs: true)
-      }
-    }
-    stage('Deploy') {
-      steps {
-        catchError() {
-          input 'Ready to deploy?'
-          echo 'deploying'
-        }
-        
-        echo 'not'
       }
     }
   }
