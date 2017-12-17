@@ -48,6 +48,9 @@ pipeline {
       }
     }
     stage('Deploy') {
+      environment {
+        HOME = '/home/jenkins'
+      }
       steps {
         sshagent(credentials: ['sshBuckwich']) {
           sh '''cd ~
