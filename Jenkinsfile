@@ -30,8 +30,7 @@ pipeline {
             DEBUG = '*'
           }
           steps {
-            sh 'ls -la'
-            timeout(unit: 'MINUTES', time: 5) {
+            timeout(unit: 'HOURS', time: 3) {
               sh 'node bin/www'
             }
             
@@ -39,11 +38,11 @@ pipeline {
         }
         stage('stop') {
           steps {
-            catchError() {
-              input 'Stop staging?'
-              sh 'pkill --signal SIGINT node'
+            timeout(time: 3, unit: 'HOURS') {
+              input 'Finished staging?'
             }
             
+            sh 'pkill --signal SIGINT node'
           }
         }
       }
