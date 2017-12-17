@@ -3,7 +3,8 @@ pipeline {
     docker {
       args '-p 127.0.0.1:3000:3000'
       image 'node'
-    }    
+    }
+    
   }
   stages {
     stage('Validate') {
@@ -24,14 +25,16 @@ pipeline {
     }
     stage('Stage') {
       parallel {
-        stage('start') {          
+        stage('start') {
           steps {
             sh 'ls -la'
             catchError() {
-              timeout(time: 3, unit: 'HOURS') {
-                sh 'node bin/app.js'
+              timeout(time: 1, unit: 'MINUTES') {
+                sh 'node bin/www'
               }
+              
             }
+            
           }
         }
         stage('stop') {
@@ -39,7 +42,8 @@ pipeline {
             catchError() {
               input 'Stop staging?'
               sh 'pkill --signal SIGINT node'
-            }            
+            }
+            
           }
         }
       }
@@ -55,7 +59,8 @@ pipeline {
           input 'Ready to deploy?'
           echo 'deploying'
         }
-        echo 'not'        
+        
+        echo 'not'
       }
     }
   }
