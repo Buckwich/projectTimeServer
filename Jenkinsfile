@@ -52,6 +52,17 @@ pipeline {
         cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenSuccess: true, cleanWhenUnstable: true, cleanupMatrixParent: true, deleteDirs: true)
       }
     }
+    stage('Deploy') {
+      agent {
+        node {
+          label 'master'
+        }
+        
+      }
+      steps {
+        sh 'hostname'
+      }
+    }
   }
   environment {
     NODE_ENV = 'production'
