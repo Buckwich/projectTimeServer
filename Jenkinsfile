@@ -53,15 +53,6 @@ pipeline {
       }
     }
     stage('Deploy') {
-      agent {
-        node {
-          label 'master'
-        }
-        
-      }
-      environment {
-        HOME = '.'
-      }
       steps {
         sshagent(credentials: ['sshBuckwich']) {
           sh 'ssh -o StrictHostKeyChecking=no -l simon buckwich.de uname -a'
