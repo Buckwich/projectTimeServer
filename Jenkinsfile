@@ -53,11 +53,11 @@ pipeline {
       }
     }
     stage('Deploy') {
-      agent {
-        sshagent (credentials: ['sshBuckwich']) {
-          sh 'ssh -o StrictHostKeyChecking=no -l simon buckwich.de uname -a'
-        }        
-      }
+      // agent {
+      //   sshagent (credentials: ['sshBuckwich']) {
+      //     sh 'ssh -o StrictHostKeyChecking=no -l simon buckwich.de uname -a'
+      //   }        
+      // }
       steps {
         sh 'hostname'
       }
