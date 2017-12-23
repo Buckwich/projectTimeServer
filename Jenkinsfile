@@ -55,13 +55,12 @@ pipeline {
         
       }
       steps {
-        sh 'ssh simon@buckwich.de hostname'
+        sh 'hostname'
       }
     }
   }
   environment {
     NODE_ENV = 'production'
     HOME = '.'
-    JENKINS_HOME = './workspace'
   }
 }
