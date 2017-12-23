@@ -27,7 +27,7 @@ pipeline {
       parallel {
         stage('start') {
           environment {
-            DEBUG = '*'
+            DEBUG = 'app:*'
           }
           steps {
             timeout(unit: 'HOURS', time: 3) {
@@ -61,6 +61,5 @@ pipeline {
   }
   environment {
     NODE_ENV = 'production'
-    HOME = '.'
   }
 }
