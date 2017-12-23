@@ -15,7 +15,7 @@ pipeline {
     stage('Deploy') {
       steps {
         sh '''ls -la
-id -u -n'''
+ssh buckwich.de'''
       }
     }
   }
