@@ -1,23 +1,12 @@
 pipeline {
   agent {
-    docker {
-      image 'node'
+    node {
+      label 'master'
     }
     
   }
   stages {
-    stage('Docker') {
-      steps {
-        sh 'echo test'
-      }
-    }
     stage('Master') {
-      agent {
-        node {
-          label 'master'
-        }
-        
-      }
       steps {
         sh 'ls -la'
       }
