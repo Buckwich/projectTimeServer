@@ -56,6 +56,11 @@ pipeline {
           sh '''pwd
 echo "$USER"
 ls -la
+ls -la /
+ls -la /home
+ls -la /var/lib
+ls -la /var/lib/jenkins
+ls -la /home/jenkins
 ssh simon@buckwich.de uname -a'''
         }
         
