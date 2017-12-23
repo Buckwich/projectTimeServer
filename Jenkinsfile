@@ -49,7 +49,7 @@ pipeline {
     }
     stage('Deploy') {
       environment {
-        HOME = '/home/jenkins'
+        HOME = './workspace'
         USER = 'root'
       }
       steps {
