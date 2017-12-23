@@ -2,7 +2,7 @@ pipeline {
   agent {
     docker {
       image 'node'
-      args '-p 127.0.0.1:3000:3000'
+      args '-p 127.0.0.1:3000:3000 --user="jenkins"'
     }
     
   }
