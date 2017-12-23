@@ -48,12 +48,20 @@ pipeline {
       }
     }
     stage('Deploy') {
+      agent {
+        node {
+          label 'master'
+        }
+        
+      }
       environment {
         HOME = '/home/jenkins'
       }
       steps {
         sshagent(credentials: ['sshBuckwich']) {
-          sh 'ssh simon@buckwich.de uname -a'
+          sh '''pwd
+ls -la
+ssh simon@buckwich.de uname -a'''
         }
         
       }
@@ -61,5 +69,6 @@ pipeline {
   }
   environment {
     NODE_ENV = 'production'
+    HOME = '.'
   }
 }
