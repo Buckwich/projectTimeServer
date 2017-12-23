@@ -55,7 +55,7 @@ pipeline {
         
       }
       steps {
-        sh 'hostname'
+        sh 'ls -la'
       }
     }
   }
