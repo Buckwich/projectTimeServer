@@ -49,13 +49,14 @@ pipeline {
     }
     stage('Deploy') {
       environment {
-        HOME = './workspace'
+        JENKINS_HOME = './workspace'
         USER = 'root'
       }
       steps {
         sshagent(credentials: ['sshBuckwich']) {
           sh '''pwd
 echo "$USER"
+id -u -n
 ls -la
 ssh simon@buckwich.de uname -a'''
         }
