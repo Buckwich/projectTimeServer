@@ -41,6 +41,8 @@ pipeline {
           agent {
             docker {
               image 'node'
+              reuseNode true
+              args '-p 127.0.0.1:3000:3000'
             }
             
           }
