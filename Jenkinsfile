@@ -55,7 +55,10 @@ pipeline {
         
       }
       steps {
-        sh 'ls -la'
+        ws(dir: '.') {
+          sh 'ls -la'
+        }
+        
       }
     }
   }
