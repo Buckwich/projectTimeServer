@@ -15,7 +15,7 @@ pipeline {
     stage('Deploy') {
       steps {
         sh '''ls -la
-ssh buckwich.de'''
+ssh simon@buckwich.de'''
       }
     }
   }
