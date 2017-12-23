@@ -53,7 +53,8 @@ pipeline {
       }
       steps {
         sshagent(credentials: ['sshBuckwich']) {
-          sh '''cd ~
+          sh '''pwd
+ls -la
 ssh -o StrictHostKeyChecking=no -l simon simon@buckwich.de uname -a'''
         }
         
