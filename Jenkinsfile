@@ -1,7 +1,7 @@
 pipeline {
   agent none
   stages {
-    stage('Docker') {
+    stage('Validate') {
       agent {
         docker {
           image 'node'
@@ -9,10 +9,69 @@ pipeline {
         
       }
       steps {
-        sh 'echo test'
+        sh 'npm -v'
       }
     }
-    stage('Master') {
+    stage('Build') {
+      agent {
+        docker {
+          image 'node'
+        }
+        
+      }
+      steps {
+        sh 'npm install'
+      }
+    }
+    stage('Test') {
+      agent {
+        docker {
+          image 'node'
+        }
+        
+      }
+      steps {
+        sh 'npm test'
+        milestone 1
+      }
+    }
+    stage('Stage') {
+      parallel {
+        stage('start') {
+          agent {
+            docker {
+              image 'node'
+            }
+            
+          }
+          environment {
+            DEBUG = 'app:*'
+          }
+          steps {
+            timeout(unit: 'HOURS', time: 3) {
+              sh 'node bin/www'
+            }
+            
+          }
+        }
+        stage('stop') {
+          agent {
+            docker {
+              image 'node'
+            }
+            
+          }
+          steps {
+            timeout(time: 3, unit: 'HOURS') {
+              input 'Finished staging?'
+            }
+            
+            sh 'pkill --signal SIGINT node'
+          }
+        }
+      }
+    }
+    stage('Deploy') {
       agent {
         node {
           label 'master'
@@ -23,5 +82,9 @@ pipeline {
         sh 'ls -la'
       }
     }
+  }
+  environment {
+    NODE_ENV = 'production'
+    HOME = '.'
   }
 }
