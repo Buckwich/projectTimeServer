@@ -30,7 +30,7 @@ pipeline {
             DEBUG = '*'
           }
           steps {
-            timeout(unit: 'SECONDS', time: 3) {
+            timeout(unit: 'HOURS', time: 3) {
               sh 'node bin/www'
             }
             
@@ -38,7 +38,7 @@ pipeline {
         }
         stage('stop') {
           steps {
-            timeout(time: 3, unit: 'SECONDS') {
+            timeout(time: 3, unit: 'HOURS') {
               input 'Finished staging?'
             }
             
