@@ -58,6 +58,7 @@ pipeline {
           agent {
             docker {
               image 'node'
+              reuseNode true
             }
             
           }
