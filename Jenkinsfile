@@ -30,7 +30,7 @@ pipeline {
             DEBUG = '*'
           }
           steps {
-            timeout(unit: 'HOURS', time: 3) {
+            timeout(unit: 'SECONDS', time: 3) {
               sh 'node bin/www'
             }
             
@@ -38,7 +38,7 @@ pipeline {
         }
         stage('stop') {
           steps {
-            timeout(time: 3, unit: 'HOURS') {
+            timeout(time: 3, unit: 'SECONDS') {
               input 'Finished staging?'
             }
             
@@ -53,9 +53,7 @@ pipeline {
       }
       steps {
         sshagent(credentials: ['sshBuckwich']) {
-          sh '''pwd
-ls -la
-ssh -o StrictHostKeyChecking=no -l simon simon@buckwich.de uname -a'''
+          sh 'ssh simon@buckwich.de uname -a'
         }
         
       }
