@@ -9,42 +9,7 @@ pipeline {
   stages {
     stage('Validate') {
       steps {
-        sh 'npm -v'
-      }
-    }
-    stage('Build') {
-      steps {
-        sh 'npm install'
-      }
-    }
-    stage('Test') {
-      steps {
-        sh 'npm test'
-        milestone 1
-      }
-    }
-    stage('Stage') {
-      parallel {
-        stage('start') {
-          environment {
-            DEBUG = 'app:*'
-          }
-          steps {
-            timeout(unit: 'HOURS', time: 3) {
-              sh 'node bin/www'
-            }
-            
-          }
-        }
-        stage('stop') {
-          steps {
-            timeout(time: 3, unit: 'HOURS') {
-              input 'Finished staging?'
-            }
-            
-            sh 'pkill --signal SIGINT node'
-          }
-        }
+        sh 'echo test'
       }
     }
     stage('Deploy') {
