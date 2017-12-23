@@ -48,7 +48,6 @@ pipeline {
       }
     }
     stage('Deploy') {
-      agent any
       environment {
         HOME = '/home/jenkins'
       }
