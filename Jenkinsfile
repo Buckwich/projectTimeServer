@@ -48,18 +48,14 @@ pipeline {
       }
     }
     stage('Deploy') {
-      agent {
-        node {
-          label 'master'
-        }
-        
-      }
+      agent any
       environment {
         HOME = '/home/jenkins'
       }
       steps {
         sshagent(credentials: ['sshBuckwich']) {
           sh '''pwd
+echo "$USER"
 ls -la
 ssh simon@buckwich.de uname -a'''
         }
