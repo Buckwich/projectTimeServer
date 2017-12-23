@@ -48,6 +48,12 @@ pipeline {
       }
     }
     stage('Deploy') {
+      agent {
+        node {
+          label 'master'
+        }
+        
+      }
       environment {
         JENKINS_HOME = './workspace'
         USER = 'root'
