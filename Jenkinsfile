@@ -48,12 +48,6 @@ pipeline {
       }
     }
     stage('Deploy') {
-      agent {
-        node {
-          label 'master'
-        }
-        
-      }
       steps {
         ws(dir: '/home/jenkins') {
           sh 'ls -la'
