@@ -54,22 +54,8 @@ pipeline {
         }
         
       }
-      environment {
-        JENKINS_HOME = './workspace'
-        USER = 'root'
-      }
       steps {
-        ws(dir: '/home/jenkins') {
-          sshagent(credentials: ['sshBuckwich']) {
-            sh '''pwd
-echo "$USER"
-id -u -n
-ls -la
-ssh simon@buckwich.de uname -a'''
-          }
-          
-        }
-        
+        sh 'ssh simon@buckwich.de hostname'
       }
     }
   }
