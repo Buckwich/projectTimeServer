@@ -67,5 +67,6 @@ ssh simon@buckwich.de uname -a'''
   environment {
     NODE_ENV = 'production'
     HOME = '.'
+    JENKINS_HOME = './workspace'
   }
 }
