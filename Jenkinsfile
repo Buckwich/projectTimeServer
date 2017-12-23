@@ -55,7 +55,7 @@ pipeline {
         
       }
       steps {
-        ws(dir: '.') {
+        ws(dir: '/home/jenkins') {
           sh 'ls -la'
         }
         
