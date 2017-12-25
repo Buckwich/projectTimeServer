@@ -14,13 +14,30 @@ pool: {
 operatorsAliases: false
 });
 
-const Tag = sequelize.define('tag', {
-type: Sequelize.STRING,
-comment: Sequelize.STRING,
-user:Sequelize.STRING,
-project:Sequelize.STRING,
-clientTime:Sequelize.DATE
+const Staging = sequelize.define('staging', {
+    type: Sequelize.STRING,
+    comment: Sequelize.STRING,
+    user:Sequelize.STRING,
+    project:Sequelize.STRING,
+    clientTime:Sequelize.DATE
 });
-module.exports = {sequelize,Tag};
+const Session = sequelize.define('session', {
+    project: {type: Sequelize.STRING,unique: "row"}, 
+    user: {type: Sequelize.STRING,unique: "row"}, 
+    start:{type: Sequelize.DATE,unique: "row"}, 
+    end:{type: Sequelize.DATE,unique: "row"}
+    // project: {type: Sequelize.STRING}, 
+    // user: {type: Sequelize.STRING}, 
+    // start:{type: Sequelize.DATE}, 
+    // end:{type: Sequelize.DATE}
+});
+const Marker =  sequelize.define('marker', {
+    title: Sequelize.STRING,      
+    time:Sequelize.DATE   
+});
+
+Session.hasMany(Marker);
+Marker.belongsTo(Session);
+module.exports = {sequelize,Staging,Session,Marker};
 
 

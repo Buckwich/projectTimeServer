@@ -1,0 +1,20 @@
+extends layout
+
+block content
+    h1= title
+    p Welcome to #{title} 
+    ul 
+        li User: #{user}
+        li Project: #{project}
+    table
+        tr
+            th User
+            th Project            
+            th Start
+            th End            
+        each row in rows
+            tr
+                td= row.user   
+                td= row.project 
+                td= moment(row.start).format()
+                td= moment(row.end).format()
