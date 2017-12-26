@@ -1,7 +1,9 @@
+require('json5/lib/require');
+const {db} = require('./config'); 
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('projectTime', 'projectTime', '12345678', {
-host: 'localhost',
-dialect: 'postgres',
+const sequelize = new Sequelize(db.db, db.user, db.password, {
+host: db.host,
+dialect: db.dialect,
 
 pool: {
     max: 5,

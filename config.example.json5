@@ -1,0 +1,9 @@
+{
+    db:{
+        host: 'localhost',
+        dialect: 'postgres',
+        user: 'projectTime',
+        password: 'example',
+        db: 'projectTime',
+    }
+}
