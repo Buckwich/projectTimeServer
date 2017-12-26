@@ -1,0 +1,55 @@
+doctype html
+html
+- var title="projectTime"
+head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/categories.css')
+    link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.css')
+    
+body
+    
+    div.row        
+        //- - for (var i = 0; i < 10; ++i) {  
+        //-     div.col-xs-12.col-sm-6.col-md-4.col-lg-3.a              
+        //-         div.box.category#a 
+        //-             div.header privat
+        //-             div.row.middle-xs.around-xs  
+        //-                 div.col-xs   
+        //-                     div.box.project tracker
+        //-                 div.col-xs
+        //-                     div.box.project backend
+        //-                 div.col-xs   
+        //-                     div.box.project a reaslly large oproject
+        //-                 div.col-xs
+        //-                     div.box.project b with a reaalu long anme
+                    
+        //- - }
+        div.col-xs-12.col-sm-6.col-md-4.col-lg-3.a              
+            div.box.category
+                div.header privat
+                div.row.middle-xs.around-xs#a  
+                    div.col-xs   
+                        div.box.project tracker
+                    div.col-xs
+                        div.box.project backend
+                    div.col-xs   
+                        div.box.project a reaslly large oproject
+                    div.col-xs
+                        div.box.project b with a reaalu long anme
+        div.col-xs-12.col-sm-6.col-md-4.col-lg-3.a              
+            div.box.category 
+                div.header privat
+                div.row.middle-xs.around-xs#b  
+                    div.col-xs   
+                        div.box.project tracker
+                    div.col-xs
+                        div.box.project backend
+                    div.col-xs   
+                        div.box.project a reaslly large oproject
+                    div.col-xs
+                        div.box.project b with a reaalu long anme
+
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js')
+    script(src='/javascripts/category.js')

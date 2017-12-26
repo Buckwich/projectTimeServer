@@ -28,10 +28,8 @@ router.get('/session', function(req, res, next) {
     
     
 });
-router.get('/week', function(req, res, next) {
-    var test=session.validateSession("simon","backend").then(console.log("success")).catch((err)=>{console.log( err)});
-    res.send(test);  
-    
+router.get('/dev', function(req, res, next) {
+    res.render('categorySelection');    
 });
 
 module.exports = router;

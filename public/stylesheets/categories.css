@@ -1,0 +1,32 @@
+.category{
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    box-sizing: border-box;
+    
+}
+.header{    
+    background-color: rgb(240, 173, 78);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;    
+    padding: 5px 10px;
+    box-sizing: border-box;
+    color:white;
+    font-size: 18px;
+}
+.project{
+    border-radius: 100px;
+    border: 1px solid #c7c7c7;
+    padding:20px 25px;
+    margin:15px;
+}
+
+.box{
+    margin-bottom:0.5rem;
+    
+}
+body{
+    padding: 50px 0;
+}
+.row{
+    min-height: 70px;
+}
