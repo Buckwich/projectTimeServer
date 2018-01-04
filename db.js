@@ -24,22 +24,38 @@ const Staging = sequelize.define('staging', {
     clientTime:Sequelize.DATE
 });
 const Session = sequelize.define('session', {
-    project: {type: Sequelize.STRING,unique: "row"}, 
+    //projectId: {type: Sequelize.INTEGER,unique: "row"}, //foreign key
     user: {type: Sequelize.STRING,unique: "row"}, 
     start:{type: Sequelize.DATE,unique: "row"}, 
-    end:{type: Sequelize.DATE,unique: "row"}
-    // project: {type: Sequelize.STRING}, 
-    // user: {type: Sequelize.STRING}, 
-    // start:{type: Sequelize.DATE}, 
-    // end:{type: Sequelize.DATE}
+    end:{type: Sequelize.DATE,unique: "row"}    
 });
 const Marker =  sequelize.define('marker', {
     title: Sequelize.STRING,      
     time:Sequelize.DATE   
 });
+const Category = sequelize.define('category',{
+    name: Sequelize.STRING,
+    color: Sequelize.STRING
+});
+const Project = sequelize.define('project',{
+    name: {type:Sequelize.STRING},
+    categoryId: {type:Sequelize.INTEGER,allowNull:false,defaultValue:1}
+});
+const User = sequelize.define('user',{
+    name: {type:Sequelize.STRING}
+});
+Session.belongsTo(Project);
+Project.hasMany(Session);
 
 Session.hasMany(Marker);
 Marker.belongsTo(Session);
-module.exports = {sequelize,Staging,Session,Marker};
+
+Project.belongsTo(Category);
+Category.hasMany(Project);
+
+Project.belongsTo(User);
+User.hasMany(Project);
+
+module.exports = {sequelize,Staging,Session,Marker,Category,Project,User};
 
 

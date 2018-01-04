@@ -22,7 +22,7 @@ router.get('/:user/:project', function(req, res, next) {
 router.get('/session', function(req, res, next) {
     
         
-    db.Session.findAll().then((rows) => {             
+db.Session.findAll({include:[db.Project]}).then((rows) => {             
         res.render('sessionTable', { rows,project:req.params.project,user:req.params.user });
     }).catch((err)=>{console.log("err");next(err);});
     

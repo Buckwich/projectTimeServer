@@ -5,8 +5,6 @@ var db = require("../db");
 var validateSession=function (user,project){
     return new Promise ( async (resolve,reject) => {
         try{
-
-        
             var rows = await db.Staging.findAll({where:{user,project},order:[['clientTime','DESC']]});               
             
             var start= rows.find((row)=>{
@@ -28,8 +26,8 @@ var validateSession=function (user,project){
                         row.destroy();
                     }
                 }); 
-    
-                var test=await db.Session.create({user,project,start:startTime, end:endTime,markers},{include:[db.Marker]});
+                
+                var test=await db.Session.create({user,project:{name:project},start:startTime, end:endTime,markers},{include:[db.Marker,db.Project]});
                 console.log("complete");
                 resolve(201);
             }
@@ -37,7 +35,7 @@ var validateSession=function (user,project){
                 resolve(202);
             }
             
-           
+            
             
         }  
         catch(err){

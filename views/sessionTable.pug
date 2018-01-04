@@ -9,12 +9,16 @@ block content
     table
         tr
             th User
-            th Project            
+            th Project   
+            th Date         
             th Start
-            th End            
+            th End       
+            th Duration     
         each row in rows
             tr
                 td= row.user   
-                td= row.project 
-                td= moment(row.start).format()
-                td= moment(row.end).format()
+                td= row.project.name 
+                td= moment(row.start).format('ll')
+                td= moment(row.start).format("LT")
+                td= moment(row.end).format("LT")
+                td= moment.duration(row.end-row.start).humanize()
