@@ -1,6 +1,6 @@
 const db=require("./db");
 db.sequelize.sync({
-    force: true
+    alter: true
 }).then(() => {
     db.Category.create({name:"Default"}).then(() => {        
         console.log('success');
